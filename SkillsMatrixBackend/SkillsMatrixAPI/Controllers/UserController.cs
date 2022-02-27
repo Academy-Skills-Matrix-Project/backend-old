@@ -1,27 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using SkillsMatrixAPI.Services;
 
 namespace SkillsMatrixAPI.Controllers
 {
+
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
-
-        public UserController(ILogger<UserController> logger)
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            _logger = logger;
+            _userService = userService;
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public ActionResult GetUsers()
         {
-            
+            return Ok(_userService.ListAllUsers());
         }
     }
 }
